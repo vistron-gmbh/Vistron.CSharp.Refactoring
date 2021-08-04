@@ -54,17 +54,18 @@ namespace PatternMatchingRefactoringProvider
                         VariableDeclarationSyntax declaration = localDeclartionSyntax.Declaration;
                         VariableDeclaratorSyntax variableDeclarationSyntax = declaration.Variables.FirstOrDefault();
 
-                        TypeSyntax type = declaration.Type; //The type used for the pattern matching.
-                        ExpressionSyntax method = variableDeclarationSyntax.Initializer.Value; //The method used as the expression for the pattern matching
-                        SyntaxToken identifier = variableDeclarationSyntax.Identifier; //Identifier I want to use as a declaration but cannot get to work
+                        //We remove trivia from everything either instantly or later so it does not hinder the building process.
+                        TypeSyntax type = declaration.Type; //The type used for the pattern matching. We keep the Trivia on this one to re-add it later
+                        ExpressionSyntax method = variableDeclarationSyntax.Initializer.Value.WithoutTrivia(); //The method used as the expression for the pattern matching
+                        SyntaxToken identifier = variableDeclarationSyntax.Identifier.WithoutTrivia(); //Identifier I want to use as a declaration but cannot get to work
 
                         //I needed to use the older SyntaxFactory to get a pattern matching with declaration to emit. The newer SyntaxGenerator would only let me check the type
                         SingleVariableDesignationSyntax singleVariableDesignation = SyntaxFactory.SingleVariableDesignation(identifier); //First we create a single variable designation
-                        DeclarationPatternSyntax singleVariableDeclaration = SyntaxFactory.DeclarationPattern(type, singleVariableDesignation); //We wrap in into a declaration
+                        DeclarationPatternSyntax singleVariableDeclaration = SyntaxFactory.DeclarationPattern(type.WithoutTrivia(), singleVariableDesignation); //We wrap in into a declaration
                         IsPatternExpressionSyntax isPatternDeclaration = SyntaxFactory.IsPatternExpression(method, singleVariableDeclaration); //The is pattern accepts the method and the declaration
                         IfStatementSyntax ifClause = SyntaxFactory.IfStatement(isPatternDeclaration, SyntaxFactory.Block()); //Finally we wrap it into a if clause with an empty block at the end.
 
-                        editor.ReplaceNode(localDeclartionSyntax, ifClause); //Replace the found variable declaration with the new pattern matching expression.
+                        editor.ReplaceNode(localDeclartionSyntax, ifClause.WithTriviaFrom(type)); //Replace the found variable declaration with the new pattern matching expression including trivia from the type.
 
                         return document.WithSyntaxRoot(editor.GetChangedRoot());
                     }

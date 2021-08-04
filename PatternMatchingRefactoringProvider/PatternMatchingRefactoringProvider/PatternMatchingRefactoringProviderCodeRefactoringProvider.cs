@@ -52,29 +52,18 @@ namespace PatternMatchingRefactoringProvider
                     {
                         SyntaxEditor editor = new SyntaxEditor(root, document.Project.Solution.Workspace);
                         VariableDeclarationSyntax declaration = localDeclartionSyntax.Declaration;
-                        VariableDeclaratorSyntax variableDeclarationSyntax = localDeclartionSyntax.Declaration.Variables.FirstOrDefault();
+                        VariableDeclaratorSyntax variableDeclarationSyntax = declaration.Variables.FirstOrDefault();
 
                         TypeSyntax type = declaration.Type; //The type used for the pattern matching.
                         ExpressionSyntax method = variableDeclarationSyntax.Initializer.Value; //The method used as the expression for the pattern matching
                         SyntaxToken identifier = variableDeclarationSyntax.Identifier; //Identifier I want to use as a declaration but cannot get to work
 
-                        SyntaxGenerator generator = SyntaxGenerator.GetGenerator(document);
+                        //I needed to use the older SyntaxFactory to get a pattern matching with declaration to emit. The newer SyntaxGenerator would only let me check the type
+                        SingleVariableDesignationSyntax singleVariableDesignation = SyntaxFactory.SingleVariableDesignation(identifier); //First we create a single variable designation
+                        DeclarationPatternSyntax singleVariableDeclaration = SyntaxFactory.DeclarationPattern(type, singleVariableDesignation); //We wrap in into a declaration
+                        IsPatternExpressionSyntax isPatternDeclaration = SyntaxFactory.IsPatternExpression(method, singleVariableDeclaration); //The is pattern accepts the method and the declaration
+                        IfStatementSyntax ifClause = SyntaxFactory.IfStatement(isPatternDeclaration, SyntaxFactory.Block()); //Finally we wrap it into a if clause with an empty block at the end.
 
-                        #region Some Stuff tried to get PatternMatching with Declaration
-                        //var identifierSyntax = SyntaxFactory.IdentifierName(identifier.Text);
-                        //var nameColonSyntax = SyntaxFactory
-                        //    .NameColon(identifierSyntax)
-                        //    .WithLeadingTrivia(SyntaxFactory.Whitespace(" "));
-
-
-                        //var designation = SyntaxFactory.SingleVariableDesignation(identifier);
-                        //var designationText = designation.ToString();
-                        //DeclarationPatternSyntax declarationPattern = SyntaxFactory.DeclarationPattern(type, designation);
-                        //var textDeclarationPattern = declarationPattern.GetText().ToString();
-                        #endregion
-
-                        BinaryExpressionSyntax isTypeExpression = generator.IsTypeExpression(method, type) as BinaryExpressionSyntax; // The pattern matching
-                        SyntaxNode ifClause = generator.IfStatement(isTypeExpression, new List<SyntaxNode>(), (List<SyntaxNode>)null); // The if clause. Null results in no else case, use a empty List for an else case.
                         editor.ReplaceNode(localDeclartionSyntax, ifClause); //Replace the found variable declaration with the new pattern matching expression.
 
                         return document.WithSyntaxRoot(editor.GetChangedRoot());

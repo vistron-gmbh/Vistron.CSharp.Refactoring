@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="PatternMatchingRefactoringProvider..c1ea1deb-6cff-4e98-b95c-2f926e1d795c" Version="1.0" Language="en-US" Publisher="m.blattner"/>
+        <Identity Id="PatternMatchingRefactoringProvider..c1ea1deb-6cff-4e98-b95c-2f926e1d795c" Version="1.1" Language="en-US" Publisher="m.blattner"/>
         <DisplayName>PatternMatchingRefactoringProvider</DisplayName>
-        <Description xml:space="preserve">Provides Pattern Matching Refactoring of local variable declarations. 1.0 Does not support Pattern Matching with Declaration. This was the goal but was missed.</Description>
-        <ReleaseNotes>Initial Release</ReleaseNotes>
+        <Description xml:space="preserve">Provides Pattern Matching Refactoring of local variable declarations. 1.1 Supports Pattern Matching with Declaration!</Description>
+        <ReleaseNotes>Second Relase with Declarative Pattern Matching</ReleaseNotes>
         <Tags>Refactoring, Pattern-Matching, Roslyn, Code-Generation, CSharp, C#</Tags>
     </Metadata>
     <Installation>

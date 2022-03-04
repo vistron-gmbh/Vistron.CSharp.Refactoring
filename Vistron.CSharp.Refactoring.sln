@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1585
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternMatchingRefactoringProvider", "PatternMatchingRefactoringProvider\PatternMatchingRefactoringProvider\PatternMatchingRefactoringProvider.csproj", "{949CBE1F-1AC4-49F5-AC65-B37BB459BB0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatternMatchingRefactoringProvider", "PatternMatchingRefactoringProvider\PatternMatchingRefactoringProvider\PatternMatchingRefactoringProvider.csproj", "{949CBE1F-1AC4-49F5-AC65-B37BB459BB0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternMatchingRefactoringProvider.Vsix", "PatternMatchingRefactoringProvider\PatternMatchingRefactoringProvider.Vsix\PatternMatchingRefactoringProvider.Vsix.csproj", "{F826B895-C684-4B8B-BA33-A60CECDFDEF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternMatchingRefactoringProviderVS2022", "PatternMatchingRefactoringProviderVS2022\PatternMatchingRefactoringProviderVS2022\PatternMatchingRefactoringProviderVS2022.csproj", "{6C97812C-D59D-4C4F-A065-60CF71FE3273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternMatchingRefactoringProviderVS2022.Vsix", "PatternMatchingRefactoringProviderVS2022\PatternMatchingRefactoringProviderVS2022.Vsix\PatternMatchingRefactoringProviderVS2022.Vsix.csproj", "{9DEA09BB-D1F2-4C5C-83E6-8654C766D3A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{F826B895-C684-4B8B-BA33-A60CECDFDEF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F826B895-C684-4B8B-BA33-A60CECDFDEF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F826B895-C684-4B8B-BA33-A60CECDFDEF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C97812C-D59D-4C4F-A065-60CF71FE3273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C97812C-D59D-4C4F-A065-60CF71FE3273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C97812C-D59D-4C4F-A065-60CF71FE3273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C97812C-D59D-4C4F-A065-60CF71FE3273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DEA09BB-D1F2-4C5C-83E6-8654C766D3A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DEA09BB-D1F2-4C5C-83E6-8654C766D3A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DEA09BB-D1F2-4C5C-83E6-8654C766D3A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DEA09BB-D1F2-4C5C-83E6-8654C766D3A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
